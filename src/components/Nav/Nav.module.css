@@ -1,0 +1,25 @@
+.site_nav {
+    grid-area: n;
+    background-color: #4a4c63;
+    text-align: center;
+}
+
+.item {
+    display: inline-grid;
+    grid-gap: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.link {
+    text-decoration: none;
+    color: #c8cbdc;
+}
+
+.link:hover {
+    color: #ffffff;
+}
+
+.link.active {
+    color: bisque;
+}
