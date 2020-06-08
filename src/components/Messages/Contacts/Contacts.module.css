@@ -1,0 +1,16 @@
+.contacts {
+    padding: 20px;
+}
+
+.contact {
+
+}
+
+.nameLink {
+    text-decoration: none;
+    color:#4a4c63;
+}
+
+.active_contact {
+    color: #d0cabd;
+}

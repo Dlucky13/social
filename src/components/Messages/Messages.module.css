@@ -1,0 +1,18 @@
+.messages {
+    display: grid;
+
+    grid-template-columns: 2fr 10fr;
+}
+
+.contacts_wrapper {
+    padding: 20px;
+}
+
+.dialogs_wrapper {
+    padding: 20px;
+    color: #252424;
+}
+
+/*.active_contact {*/
+/*    color: #d0cabd;*/
+/*}*/
