@@ -3,12 +3,13 @@ import styles from './Contacts.module.css';
 import {NavLink} from "react-router-dom";
 
 const Contacts = (props) => {
-    debugger;
     let path = '/dialog/' + props.id;
     return (
-        <div>
+        <div className={styles.contact_info}>
+            <img src='https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/Avatar_2_logo.jpg/220px-Avatar_2_logo.jpg'
+    className={styles.avatar}/>
             <NavLink to={path} className={styles.nameLink} activeClassName={styles.active_contact}
-            >{props.name}</NavLink>
+                >{props.name}</NavLink>
         </div>
     )
 }

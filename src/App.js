@@ -7,23 +7,22 @@ import Messages from "./components/Messages/Messages";
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
+import Sidebar from './components/Sidebar/Sidebar';
 import {BrowserRouter, Route} from 'react-router-dom';
 
 
 const App = (props) => {
-    // debugger;
-
     return (
         <BrowserRouter>
         <div className='app_wrapper'>
-            <Header/>
-            <Nav/>
+            <Header />
+            <Nav />
+            <Sidebar state={props.state.sidebarPage} />
             <div className='wrapper_main_content'>
-                < Route exact path='/' render={ () =>  <Profile myPostsData={props.myPostsData}/>}/>
-                < Route  path='/profile' render={ () =>  <Profile myPostsData={props.myPostsData}/>}/>
-                {/*< Route path='/profile' component={Profile}/>*/}
-                < Route path='/messages' render={ () => <Messages contactsData={props.contactsData}
-                                                  dialogsData={props.dialogsData}/>}/>
+                < Route exact path='/' render={ () =>  <Profile state={props.state.profilePage}/>}/>
+                < Route  path='/profile' render={ () =>  <Profile state={props.state.profilePage}/>}/>
+                < Route path='/messages' render={
+                    () => <Messages state={props.state.messagesPage} />}/>
                 < Route path='/news' component={News}/>
                 < Route path='/music' component={Music}/>
                 < Route path='/settings' component={Settings}/>

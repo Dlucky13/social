@@ -1,16 +1,24 @@
-.contacts {
-    padding: 20px;
-}
+/*.contacts {*/
+/*    padding: 20px;*/
+/*}*/
 
-.contact {
-
+.contact_info {
+    display: flex;
+    margin: 10px;
 }
 
 .nameLink {
     text-decoration: none;
     color:#4a4c63;
+    padding-top: 5px;
 }
 
 .active_contact {
     color: #d0cabd;
+}
+
+.avatar {
+    width: 40px;
+    border-radius: 20px;
+    margin-right: 10px;
 }

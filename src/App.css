@@ -5,14 +5,14 @@
   background: #edf2f6;
 
     grid-template-areas:
-    'h h '
-    'n n'
-    'c c'
+    'h h h'
+    'n n n'
+    's c c'
 ;
 
 
     grid-template-rows: 50px 80px 1fr;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr 2fr;
 }
 
 .wrapper_main_content {

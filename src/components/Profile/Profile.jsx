@@ -4,18 +4,11 @@ import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 
 const Profile = (props) => {
-    // debugger;
-    // let myPostsData = [
-    //     { id: 1, text:'Hi, how are you?' , likeCount:10},
-    //     { id: 2, text:"It's my first post" , likeCount:25}
-    // ];
-
-
     return (
-            <div>
-                <ProfileInfo />
-                <MyPosts myPostsData={props.myPostsData} />
-            </div>
+        <div className={styles.profile}>
+            <ProfileInfo/>
+            <MyPosts myPostsData={props.state.myPostsData}/>
+        </div>
     )
 }
 

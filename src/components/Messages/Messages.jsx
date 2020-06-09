@@ -6,15 +6,14 @@ import Contacts from "./Contacts/Contacts";
 
 
 const Messages = (props) => {
-
-    let contactsElement = props.contactsData.map( contact =>
+    let contactsElement = props.state.contactsData.map( contact =>
     {
         return (
             <Contacts name={contact.name} id={contact.id}/>
             )
     })
 
-    let dialogsElement = props.dialogsData.map (dialog => {
+    let dialogsElement = props.state.dialogsData.map (dialog => {
         return (
             <Dialogs text={dialog.text} />
         )
