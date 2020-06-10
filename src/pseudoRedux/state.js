@@ -1,3 +1,4 @@
+import {rerenderEntireTree} from "../render";
 
 let state = {
     messagesPage: {
@@ -19,6 +20,7 @@ let state = {
             { id: 1, text:'Hi, how are you?' , likeCount:10},
             { id: 2, text:"It's my first post" , likeCount:25}
         ],
+        newPostText: 'ititiit'
     },
     sidebarPage: {
         friendsData: [
@@ -29,4 +31,20 @@ let state = {
     }
 }
 
+export let addPost = (message) => {
+    let post = {
+        id: 3,
+        text: message,
+        likeCount: 0
+    };
+    state.profilePage.myPostsData.push(post);
+    rerenderEntireTree(state);
+}
+
+export let updateNewPostInput = (value) => {
+    state.profilePage.newPostText = value;
+    rerenderEntireTree(state);
+}
+
 export default state;
+

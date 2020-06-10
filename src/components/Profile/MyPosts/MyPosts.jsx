@@ -2,6 +2,7 @@ import React from 'react' ;
 import styles from './MyPosts.module.css';
 import Post from './Post/Post'
 
+export let newPostRef = React.createRef()
 
 const MyPosts = (props) => {
     let my_posts_element = props.myPostsData.map ( post => {
@@ -10,9 +11,25 @@ const MyPosts = (props) => {
         )
     });
 
+    let onPostChange = () => {
+        let text = newPostRef.current.value
+        props.updateNewPostInput(text);
+    }
+
+    let addNewPost = () => {
+        let text = newPostRef.current.value;
+        props.addPost(text);
+        props.updateNewPostInput('');
+    }
+
     return (
        <div className={styles.posts}>
-           <button> new post </button>
+           <div>
+               <textarea ref={newPostRef} onChange={onPostChange} value={props.newPostText}/>
+           </div>
+           <div>
+               <button onClick={ addNewPost }> new post</button>
+           </div>
            <h3 className={styles.header}>My posts</h3>
             <div>
                 {my_posts_element}

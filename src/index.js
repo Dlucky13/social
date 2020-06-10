@@ -1,18 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
-import state from './pseudoRedux/state';
+import {rerenderEntireTree} from './render';
+import state from './pseudoRedux/state'
 
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App state={state} />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
+rerenderEntireTree(state);
 
 
 // If you want your app to work offline and load faster, you can change

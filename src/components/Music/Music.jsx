@@ -2,9 +2,10 @@ import React from 'react';
 import styles from './Music.module.css';
 
 const Music = ( props ) => {
+
     return (
         <div>
-            Music
+            <h1>Music</h1>
         </div>
     )
 }

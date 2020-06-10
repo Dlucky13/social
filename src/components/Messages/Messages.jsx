@@ -21,15 +21,12 @@ const Messages = (props) => {
 
     return (
         <div className={styles.messages}>
-            <BrowserRouter>
-                <div className={styles.contacts_wrapper} >
-                    {contactsElement}
-                </div>
-                {/*< Route path='/dialog/3' component={Dialogs}/>*/}
-                <div className={styles.dialogs_wrapper}>
-                    {dialogsElement}
-                </div>
-            </BrowserRouter>
+            <div className={styles.contacts_wrapper}>
+                {contactsElement}
+            </div>
+            <div className={styles.dialogs_wrapper}>
+                {dialogsElement}
+            </div>
         </div>
     )
 }
