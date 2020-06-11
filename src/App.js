@@ -8,7 +8,7 @@ import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import Sidebar from './components/Sidebar/Sidebar';
-import { Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 
 
 const App = (props) => {
@@ -25,7 +25,8 @@ const App = (props) => {
                     updateNewPostInput={props.updateNewPostInput}/>}/>
                 < Route path='/messages' render={
                     () => <Messages state={props.state.messagesPage} />}/>
-                < Route path='/news' component={News}/>
+                < Route path='/news' render={ () => <News state={props.state.newsPage}
+                      updateNews={props.updateNews} updateNewsText={props.updateNewsText}/>}/>
                 < Route path='/music' component={Music}/>
                 < Route path='/settings' component={Settings}/>
             </div>

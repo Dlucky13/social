@@ -1,4 +1,6 @@
-import {rerenderEntireTree} from "../render";
+let rerenderEntireTree = () => {
+    console.log( 'state changed');
+}
 
 let state = {
     messagesPage: {
@@ -20,7 +22,7 @@ let state = {
             { id: 1, text:'Hi, how are you?' , likeCount:10},
             { id: 2, text:"It's my first post" , likeCount:25}
         ],
-        newPostText: 'ititiit'
+        newPostText: 'type new message'
     },
     sidebarPage: {
         friendsData: [
@@ -28,16 +30,22 @@ let state = {
             {id:2, name: 'Ivan'},
             {id:3, name: 'Nikita'}
         ]
+    },
+    newsPage: {
+        news: [
+            {id:1 , text: 'We added new function'},
+        ],
+        addNewsText: 'something happing?'
     }
 }
-
-export let addPost = (message) => {
+export let addPost = () => {
     let post = {
         id: 3,
-        text: message,
+        text: state.profilePage.newPostText,
         likeCount: 0
     };
     state.profilePage.myPostsData.push(post);
+    state.profilePage.newPostText = '';
     rerenderEntireTree(state);
 }
 
@@ -46,5 +54,23 @@ export let updateNewPostInput = (value) => {
     rerenderEntireTree(state);
 }
 
+export let updateNewsText = (value) => {
+    state.newsPage.addNewsText = value;
+    rerenderEntireTree(state);
+}
+
+export  let updateNews = () => {
+    let news = {
+        id:2,
+        text: state.newsPage.addNewsText
+    };
+    state.newsPage.news.push(news);
+    state.newsPage.addNewsText ='';
+    rerenderEntireTree(state);
+}
+
+export let subscribe = (observer) => {
+    rerenderEntireTree = observer;
+}
 export default state;
 

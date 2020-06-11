@@ -17,9 +17,7 @@ const MyPosts = (props) => {
     }
 
     let addNewPost = () => {
-        let text = newPostRef.current.value;
-        props.addPost(text);
-        props.updateNewPostInput('');
+        props.addPost();
     }
 
     return (
