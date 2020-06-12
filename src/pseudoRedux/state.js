@@ -14,6 +14,7 @@ let store = {
                 {id:2, text:'How about Thusday at 7.00 ?' },
                 {id:3, text:'Have any plan on the next weekend?' }
             ],
+            addMessageText: 'new Message',
         },
         profilePage: {
             myPostsData: [
@@ -48,9 +49,9 @@ let store = {
         this._state._subscriber = observer;
     },
 
-    dispatch(action) {
+    dispatch: function (action) {
 
-        if ( action.type === 'addPost') {
+        if (action.type === 'addPost') {
 
             let post = {
                 id: 3,
@@ -70,12 +71,12 @@ let store = {
         } else if (action.type === 'updateNews') {
 
             let news = {
-                id:2,
+                id: 2,
                 text: this._state.newsPage.addNewsText
             };
 
             this._state.newsPage.news.push(news);
-            this._state.newsPage.addNewsText ='';
+            this._state.newsPage.addNewsText = '';
             this._state._subscriber(this._state);
 
         } else if (action.type === 'updateNewsText') {
@@ -83,10 +84,35 @@ let store = {
             this._state.newsPage.addNewsText = action.text;
             this._state._subscriber(this._state);
 
+        } else if (action.type === 'updateAddMessageText') {
+
+            this._state.messagesPage.addMessageText = action.text;
+            this._state._subscriber(this.getState());
+
+        } else if (action.type === 'addMessageState') {
+
+            let message = {
+                id:4, text: store._state.messagesPage.addMessageText
+            };
+            this._state.messagesPage.dialogsData.push(message);
+            this.dispatch( {type: 'updateAddMessageText', text: ''});
+            this._state._subscriber(this.getState());
         }
 
     }
 }
+
+export const actionCreator_onPostChange = (text) => {
+    return (
+        { type:'updateNewPostInput' ,text :text}
+    )
+};
+export const actionCreator_addNewPost = () => ({type: 'addPost'});
+export const actionCreator_updateText = (text) => ({ type:'updateNewsText', text: text});
+export const actionCreator_addNews = () => ({type: 'updateNews'});
+export const actionCreator_newMessageInput = (text) => ({type: 'updateAddMessageText', text: text});
+export const actionCreator_addMessage = () => ({type: 'addMessageState'});
+
 
 
 window.store = store;

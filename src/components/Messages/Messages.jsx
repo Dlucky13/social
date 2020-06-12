@@ -1,11 +1,12 @@
 import React from 'react'
 import styles from './Messages.module.css';
-import {BrowserRouter, NavLink, Route} from 'react-router-dom';
-import Dialogs from "./Dialogs/Dialogs";
+// import {BrowserRouter, NavLink, Route} from 'react-router-dom';
+import Dialogs, {AddMessage} from "./Dialogs/Dialogs";
 import Contacts from "./Contacts/Contacts";
 
 
 const Messages = (props) => {
+
     let contactsElement = props.state.contactsData.map( contact =>
     {
         return (
@@ -27,6 +28,7 @@ const Messages = (props) => {
             <div className={styles.dialogs_wrapper}>
                 {dialogsElement}
             </div>
+            <AddMessage addMessageText={props.state.addMessageText} dispatch={props.dispatch} />
         </div>
     )
 }

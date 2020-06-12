@@ -1,5 +1,6 @@
 import React from "react";
 import styles from './News.module.css';
+import {actionCreator_addNews, actionCreator_updateText} from "../../pseudoRedux/state";
 
 let newsText = React.createRef()
 
@@ -8,6 +9,8 @@ const OneNews = (props) => {
         <p> {props.text} </p>
     )
 };
+
+
 
 const News = ( props ) => {
 
@@ -19,11 +22,11 @@ const News = ( props ) => {
 
     let updateText = () => {
         let text = newsText.current.value;
-        props.dispatch({ type:'updateNewsText', text: text})
+        props.dispatch(actionCreator_updateText(text))
     };
 
     let addNews = () => {
-        props.dispatch({type:'updateNews'});
+        props.dispatch(actionCreator_addNews());
     };
 
     return (

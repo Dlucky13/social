@@ -1,10 +1,13 @@
 import React from 'react' ;
 import styles from './MyPosts.module.css';
 import Post from './Post/Post'
+import {actionCreator_addNewPost, actionCreator_onPostChange} from "../../../pseudoRedux/state";
 
 export let newPostRef = React.createRef()
 
 const MyPosts = (props) => {
+
+
 
     let my_posts_element = props.myPostsData.map ( post => {
         return (
@@ -14,11 +17,11 @@ const MyPosts = (props) => {
 
     let onPostChange = () => {
         let text = newPostRef.current.value
-        props.dispatch({ type:'updateNewPostInput' ,text :text});
+        props.dispatch(actionCreator_onPostChange(text));
     }
 
     let addNewPost = () => {
-        props.dispatch({type: 'addPost'});
+        props.dispatch(actionCreator_addNewPost());
     }
 
     return (
