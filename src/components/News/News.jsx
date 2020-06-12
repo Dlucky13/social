@@ -19,11 +19,11 @@ const News = ( props ) => {
 
     let updateText = () => {
         let text = newsText.current.value;
-        props.updateNewsText(text);
+        props.dispatch({ type:'updateNewsText', text: text})
     };
 
     let addNews = () => {
-        props.updateNews();
+        props.dispatch({type:'updateNews'});
     };
 
     return (

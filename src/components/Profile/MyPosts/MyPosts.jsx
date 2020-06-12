@@ -14,11 +14,11 @@ const MyPosts = (props) => {
 
     let onPostChange = () => {
         let text = newPostRef.current.value
-        props.updateNewPostInput(text);
+        props.dispatch({ type:'updateNewPostInput' ,text :text});
     }
 
     let addNewPost = () => {
-        props.addPost();
+        props.dispatch({type: 'addPost'});
     }
 
     return (

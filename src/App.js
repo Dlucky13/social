@@ -19,15 +19,14 @@ const App = (props) => {
             <Nav />
             <Sidebar state={props.state.sidebarPage} />
             <div className='wrapper_main_content'>
-                < Route exact path='/' render={ () =>  <Profile state={props.state.profilePage}/>}/>
+                < Route exact path='/' render={ () =>  <Profile state={props.state.profilePage} dispatch={props.dispatch}/>}/>
                 < Route  path='/profile' render={ () =>  <
                     Profile state={props.state.profilePage}
-                    addPost={props.addPost}
-                    updateNewPostInput={props.updateNewPostInput}/>}/>
+                            dispatch={props.dispatch}/>}/>
                 < Route path='/messages' render={
                     () => <Messages state={props.state.messagesPage} />}/>
                 < Route path='/news' render={ () => <News state={props.state.newsPage}
-                      updateNews={props.updateNews} updateNewsText={props.updateNewsText}/>}/>
+                              dispatch={props.dispatch}/>}/>
                 < Route path='/music' component={Music}/>
                 < Route path='/settings' component={Settings}/>
             </div>

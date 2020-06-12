@@ -1,7 +1,3 @@
-// let rerenderEntireTree = () => {
-//     console.log( 'state changed');
-// }
-
 
 let store = {
     _state: {
@@ -40,7 +36,7 @@ let store = {
             addNewsText: 'something happing?'
         },
 
-        _subscriber: []
+        _subscriber: [],
     },
 
     getState() {
@@ -48,52 +44,51 @@ let store = {
     },
 
 
-    addPost() {
-
-        let post = {
-            id: 3,
-            text: this._state.profilePage.newPostText,
-            likeCount: 0
-        };
-
-        this._state.profilePage.myPostsData.push(post);
-        this._state.profilePage.newPostText = '';
-        this._state._subscriber(this._state);
-    },
-
-    updateNewPostInput(value) {
-        this._state.profilePage.newPostText = value;
-        this._state._subscriber(this._state);
-    },
-
-    updateNewsText (value) {
-        this._state.newsPage.addNewsText = value;
-        this._state._subscriber(this._state);
-    },
-
-    updateNews() {
-        let news = {
-            id:2,
-            text: this._state.newsPage.addNewsText
-        };
-        this._state.newsPage.news.push(news);
-        this._state.newsPage.addNewsText ='';
-        this._state._subscriber(this._state);
-    },
-
     setSubscribe(observer) {
-        // let fnObj = {
-        //     [observer.name]:observer,
-        // }
-        // this.state._subscriber.push(fnObj)
         this._state._subscriber = observer;
-        // debugger;
+    },
+
+    dispatch(action) {
+
+        if ( action.type === 'addPost') {
+
+            let post = {
+                id: 3,
+                text: this._state.profilePage.newPostText,
+                likeCount: 0
+            };
+
+            this._state.profilePage.myPostsData.push(post);
+            this._state.profilePage.newPostText = '';
+            this._state._subscriber(this._state);
+
+        } else if (action.type === 'updateNewPostInput') {
+
+            this._state.profilePage.newPostText = action.text;
+            this._state._subscriber(this._state);
+
+        } else if (action.type === 'updateNews') {
+
+            let news = {
+                id:2,
+                text: this._state.newsPage.addNewsText
+            };
+
+            this._state.newsPage.news.push(news);
+            this._state.newsPage.addNewsText ='';
+            this._state._subscriber(this._state);
+
+        } else if (action.type === 'updateNewsText') {
+
+            this._state.newsPage.addNewsText = action.text;
+            this._state._subscriber(this._state);
+
+        }
+
     }
 }
 
 
 window.store = store;
-
-
 export default store;
 
