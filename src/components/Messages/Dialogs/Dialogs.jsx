@@ -1,14 +1,12 @@
 import React from 'react';
 import styles from './Dialogs.module.css';
-import {actionCreator_addMessage, actionCreator_newMessageInput} from "../../../pseudoRedux/state";
+import {actionCreator_addMessage, actionCreator_newMessageInput,} from "../../../pseudoRedux/messagesPage-reducer";
 
-
-let messageInput = React.createRef();
 
 export const AddMessage = (props) => {
 
-    const newMessageInput = () => {
-        let text = messageInput.current.value;
+    const newMessageInput = (evt) => {
+        let text = evt.target.value;
         props.dispatch(actionCreator_newMessageInput(text));
     }
 
@@ -18,7 +16,7 @@ export const AddMessage = (props) => {
 
     return (
         <div>
-            <textarea onChange={newMessageInput} ref={messageInput} value={props.addMessageText} />
+            <textarea onChange={newMessageInput} value={props.addMessageText} />
             <button onClick={addMessage}>Send Message</button>
         </div>
     )

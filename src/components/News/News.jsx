@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './News.module.css';
-import {actionCreator_addNews, actionCreator_updateText} from "../../pseudoRedux/state";
+import {actionCreator_addNews, actionCreator_updateText} from "../../pseudoRedux/newsPage-reducer";
 
 let newsText = React.createRef()
 

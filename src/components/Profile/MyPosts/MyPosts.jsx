@@ -1,7 +1,7 @@
 import React from 'react' ;
 import styles from './MyPosts.module.css';
 import Post from './Post/Post'
-import {actionCreator_addNewPost, actionCreator_onPostChange} from "../../../pseudoRedux/state";
+import {actionCreator_addNewPost, actionCreator_onPostChange} from "../../../pseudoRedux/profilePage-reducer";
 
 export let newPostRef = React.createRef()
 
