@@ -1,4 +1,13 @@
-const profilePage_reducer = (state, action) => {
+let initialState = {
+        myPostsData: [
+            { id: 1, text:'Hi, how are you?' , likeCount:10},
+            { id: 2, text:"It's my first post" , likeCount:25}
+        ],
+        newPostText: 'type new message'
+
+}
+
+const profilePage_reducer = (state = initialState, action) => {
 
     switch (action.type) {
         case 'addPost':

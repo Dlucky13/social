@@ -1,4 +1,12 @@
-const newsPage_reducer = (state, action) => {
+let initialState = {
+        news: [
+            {id:1 , text: 'We added new function'},
+        ],
+        addNewsText: 'something happing?'
+
+}
+
+const newsPage_reducer = (state = initialState, action) => {
 
     switch(action.type) {
         case 'updateNews':

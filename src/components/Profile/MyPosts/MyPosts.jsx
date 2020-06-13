@@ -6,9 +6,6 @@ import {actionCreator_addNewPost, actionCreator_onPostChange} from "../../../pse
 export let newPostRef = React.createRef()
 
 const MyPosts = (props) => {
-
-
-
     let my_posts_element = props.myPostsData.map ( post => {
         return (
             <Post text={post.text} likeCount={post.likeCount}/>
