@@ -1,17 +1,16 @@
 import React from 'react';
 import styles from './Dialogs.module.css';
-import {actionCreator_addMessage, actionCreator_newMessageInput,} from "../../../pseudoRedux/messagesPage-reducer";
 
 
 export const AddMessage = (props) => {
 
     const newMessageInput = (evt) => {
         let text = evt.target.value;
-        props.dispatch(actionCreator_newMessageInput(text));
+        props.newMessageInputCont(text);
     }
 
     const addMessage = () => {
-        props.dispatch(actionCreator_addMessage());
+        props.addMessageCont();
     }
 
     return (

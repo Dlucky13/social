@@ -1,12 +1,12 @@
 import React from 'react' ;
 import styles from './MyPosts.module.css';
 import Post from './Post/Post'
-import {actionCreator_addNewPost, actionCreator_onPostChange} from "../../../pseudoRedux/profilePage-reducer";
 
 export let newPostRef = React.createRef()
 
 const MyPosts = (props) => {
-    let my_posts_element = props.myPostsData.map ( post => {
+
+    let my_posts_element = props.profilePage.myPostsData.map ( post => {
         return (
             <Post text={post.text} likeCount={post.likeCount}/>
         )
@@ -14,17 +14,17 @@ const MyPosts = (props) => {
 
     let onPostChange = () => {
         let text = newPostRef.current.value
-        props.dispatch(actionCreator_onPostChange(text));
+        props.onPostChangeCont(text);
     }
 
     let addNewPost = () => {
-        props.dispatch(actionCreator_addNewPost());
+        props.addNewPostCont();
     }
 
     return (
        <div className={styles.posts}>
            <div>
-               <textarea ref={newPostRef} onChange={onPostChange} value={props.newPostText}/>
+               <textarea ref={newPostRef} onChange={onPostChange} value={props.profilePage.newPostText}/>
            </div>
            <div>
                <button onClick={ addNewPost }> new post</button>

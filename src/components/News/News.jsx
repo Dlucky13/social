@@ -1,6 +1,5 @@
 import React from "react";
 import styles from './News.module.css';
-import {actionCreator_addNews, actionCreator_updateText} from "../../pseudoRedux/newsPage-reducer";
 
 let newsText = React.createRef()
 
@@ -22,11 +21,11 @@ const News = ( props ) => {
 
     let updateText = () => {
         let text = newsText.current.value;
-        props.dispatch(actionCreator_updateText(text))
+        props.updateTextCont(text)
     };
 
     let addNews = () => {
-        props.dispatch(actionCreator_addNews());
+        props.addNewsCont();
     };
 
     return (
