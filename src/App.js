@@ -20,10 +20,10 @@ const App = (props) => {
             <Nav />
             <Sidebar state={state.sidebarPage} />
             <div className='wrapper_main_content'>
-                < Route exact path='/' render={ () => <Profile store={props.store}/>}/>
-                < Route path='/profile' render={ () => <Profile store={props.store}/>}/>
-                < Route path='/messages' render={ () => <MessagesContainer store={props.store}/>}/>
-                < Route path='/news' render={ () => <NewsContainer store={props.store}/>}/>
+                < Route exact path='/' render={ () => <Profile />}/>
+                < Route path='/profile' render={ () => <Profile />}/>
+                < Route path='/messages' render={ () => <MessagesContainer />}/>
+                < Route path='/news' render={ () => <NewsContainer />}/>
                 < Route path='/music' component={Music}/>
                 < Route path='/settings' component={Settings}/>
             </div>
