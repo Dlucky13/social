@@ -9,20 +9,23 @@ let initialState = {
 const newsPage_reducer = (state = initialState, action) => {
 
     switch(action.type) {
-        case 'updateNews':
+        case 'updateNews': {
             let news = {
                 id: 2,
                 text: state.addNewsText
             };
+            let stateCopy = {...state};
+            stateCopy.news = [...state.news];
+            stateCopy.news.push(news);
+            stateCopy.addNewsText = '';
+            return stateCopy;
+        }
 
-            state.news.push(news);
-            state.addNewsText = '';
-            return state;
-
-        case 'updateNewsText':
-            state.addNewsText = action.text;
-            return state;
-
+        case 'updateNewsText': {
+            let stateCopy= {...state};
+            stateCopy.addNewsText = action.text;
+            return stateCopy;
+        }
         default:
             return state;
     }

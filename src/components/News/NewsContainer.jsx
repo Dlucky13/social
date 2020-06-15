@@ -1,30 +1,27 @@
 import React from "react";
 import {actionCreator_addNews, actionCreator_updateText} from "../../pseudoRedux/newsPage-reducer";
 import News from "./News";
-import StoreContext from "../../Context";
+import {connect} from "react-redux";
 
-const NewsContainer = ( props ) => {
-
-    return (
-        <StoreContext.Consumer>
-            { store => {
-                let state = store.getState().newsPage;
-
-                let updateTextCont = (text) => {
-                    store.dispatch(actionCreator_updateText(text))
-                };
-
-                let addNewsCont = () => {
-                    store.dispatch(actionCreator_addNews());
-                };
-
-                return (
-                <News updateTextCont={updateTextCont} addNewsCont={addNewsCont} state={state}/>
-                )
-            }
-            }
-            </StoreContext.Consumer>
-    )
+let mapStateToProps = (state) => {
+    // debugger
+    return {
+        news: state.newsPage.news,
+        addNewsText: state.newsPage.addNewsText
+    }
 }
+
+let mapDispatchToProps = (dispatch) => {
+    return {
+        updateTextCont: (text) => {
+            dispatch(actionCreator_updateText(text))
+        },
+        addNewsCont: () => {
+            dispatch(actionCreator_addNews())
+        }
+    }
+}
+
+const NewsContainer = connect(mapStateToProps,mapDispatchToProps)(News);
 
 export default NewsContainer;

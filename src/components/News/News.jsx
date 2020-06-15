@@ -13,7 +13,7 @@ const OneNews = (props) => {
 
 const News = ( props ) => {
 
-    let postedNews = props.state.news.map( news => {
+    let postedNews = props.news.map( news => {
         return (
             <OneNews text={news.text}/>
         )
@@ -32,7 +32,7 @@ const News = ( props ) => {
         <div>
             <h2>News</h2>
             <div className={styles.add_news_wrapper}>
-                <textarea ref={newsText} value={props.state.addNewsText} onChange={updateText}/>
+                <textarea ref={newsText} value={props.addNewsText} onChange={updateText}/>
                 <button onClick={addNews}>Add news</button>
             </div>
             <div>

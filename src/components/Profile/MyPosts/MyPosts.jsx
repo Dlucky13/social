@@ -6,7 +6,7 @@ export let newPostRef = React.createRef()
 
 const MyPosts = (props) => {
 
-    let my_posts_element = props.profilePage.myPostsData.map ( post => {
+    let my_posts_element = props.myPostsData.map ( post => {
         return (
             <Post text={post.text} likeCount={post.likeCount}/>
         )
@@ -24,7 +24,7 @@ const MyPosts = (props) => {
     return (
        <div className={styles.posts}>
            <div>
-               <textarea ref={newPostRef} onChange={onPostChange} value={props.profilePage.newPostText}/>
+               <textarea ref={newPostRef} onChange={onPostChange} value={props.newPostText}/>
            </div>
            <div>
                <button onClick={ addNewPost }> new post</button>

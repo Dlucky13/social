@@ -1,30 +1,29 @@
 import React from 'react'
 import Messages from "./Messages";
 import {actionCreator_addMessage, actionCreator_newMessageInput} from "../../pseudoRedux/messagesPage-reducer";
-import StoreContext from "../../Context";
+import {connect} from "react-redux";
 
 
-const MessagesContainer = () => {
-
-    return (
-        <StoreContext.Consumer>
-            {(store) => {
-                let state = store.getState().messagesPage;
-
-                let newMessageInputCont = (text) => {
-                    store.dispatch(actionCreator_newMessageInput(text));
-                }
-
-                let addMessageCont = () => {
-                    store.dispatch(actionCreator_addMessage());
-                }
-                return <Messages newMessageInputCont={newMessageInputCont} addMessageCont={addMessageCont}
-                                 state={state}/>
-            }
-            }
-        </StoreContext.Consumer>
-    )
-
+let mapStateToProps = (state) => {
+    // debugger
+    return {
+        contactsData: state.messagesPage.contactsData,
+        dialogsData: state.messagesPage.dialogsData,
+        addMessageText: state.messagesPage.addMessageText,
+    }
 }
+
+let mapDispatchToProps = (dispatch) => {
+    return {
+        newMessageInputCont: (text) => {
+            dispatch(actionCreator_newMessageInput(text))
+        },
+        addMessageCont: () => {
+            dispatch(actionCreator_addMessage())
+        }
+    }
+}
+
+const MessagesContainer = connect(mapStateToProps,mapDispatchToProps)(Messages)
 
 export default MessagesContainer;

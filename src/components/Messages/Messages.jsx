@@ -6,15 +6,15 @@ import Contacts from "./Contacts/Contacts";
 
 
 const Messages = (props) => {
-// debugger
-    let contactsElement = props.state.contactsData.map( contact =>
+
+    let contactsElement = props.contactsData.map( contact =>
     {
         return (
             <Contacts name={contact.name} id={contact.id}/>
             )
     })
 
-    let dialogsElement = props.state.dialogsData.map (dialog => {
+    let dialogsElement = props.dialogsData.map (dialog => {
         return (
             <Dialogs text={dialog.text} />
         )
@@ -28,7 +28,7 @@ const Messages = (props) => {
             <div className={styles.dialogs_wrapper}>
                 {dialogsElement}
             </div>
-            <AddMessage addMessageText={props.state.addMessageText} newMessageInputCont={props.newMessageInputCont}
+            <AddMessage addMessageText={props.addMessageText} newMessageInputCont={props.newMessageInputCont}
                         addMessageCont={props.addMessageCont} />
         </div>
     )
