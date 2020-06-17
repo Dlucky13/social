@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './Friend.module.css';
+import styles from './Friend_sidebar.module.css';
 
-const Friend = (props) => {
+const Friend_sidebar = (props) => {
     return (
         <div className={styles.friend_wrapper}>
             <img src='https://i1.sndcdn.com/avatars-000323700456-wu94n2-t500x500.jpg' className={styles.ava}/>
@@ -10,4 +10,4 @@ const Friend = (props) => {
     )
 }
 
-export default Friend;
+export default Friend_sidebar;

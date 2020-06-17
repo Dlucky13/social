@@ -19,24 +19,25 @@ let initialState = {
 const messagesPage_reducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case 'updateAddMessageText': {
-            let stateCopy = {...state};
-            stateCopy.addMessageText = action.text;
-            return stateCopy;
-        }
+        case 'updateAddMessageText':
+            return {
+                ...state,
+                addMessageText: action.text,
+            }
 
-        case 'addMessageState': {
+        case 'addMessageState':
             let message = {
                 id: 4,
                 text: state.addMessageText
             };
 
-            let stateCopy = {...state};
-            stateCopy.dialogsData = [...state.dialogsData];
-            stateCopy.dialogsData.push(message);
-            return messagesPage_reducer(stateCopy, {type: 'updateAddMessageText', text: ''});
+             return messagesPage_reducer({
+                 ...state,
+                 dialogsData: [...state.dialogsData,message],
+             },
+             {type: 'updateAddMessageText', text: ''});
 
-        }
+
         default:
             return state;
     }

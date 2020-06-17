@@ -9,6 +9,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import {Route} from 'react-router-dom';
 import MessagesContainer from "./components/Messages/MessagesContainer";
 import NewsContainer from "./components/News/NewsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 const App = (props) => {
@@ -26,6 +27,7 @@ const App = (props) => {
                 < Route path='/news' render={ () => <NewsContainer />}/>
                 < Route path='/music' component={Music}/>
                 < Route path='/settings' component={Settings}/>
+                < Route path='/users' render={ () => <UsersContainer />}/>
             </div>
         </div>
     );

@@ -8,8 +8,7 @@ let initialState = {
 }
 
 const sideBar_reducer = (state = initialState, action) => {
-    let stateCopy = {...state}
-    return stateCopy;
+    return {...state};
 }
 
 

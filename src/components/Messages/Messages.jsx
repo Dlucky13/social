@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './Messages.module.css';
-// import {BrowserRouter, NavLink, Route} from 'react-router-dom';
 import Dialogs, {AddMessage} from "./Dialogs/Dialogs";
 import Contacts from "./Contacts/Contacts";
 
@@ -10,13 +9,13 @@ const Messages = (props) => {
     let contactsElement = props.contactsData.map( contact =>
     {
         return (
-            <Contacts name={contact.name} id={contact.id}/>
+            <Contacts name={contact.name} key={contact.id} id={contact.id}/>
             )
     })
 
     let dialogsElement = props.dialogsData.map (dialog => {
         return (
-            <Dialogs text={dialog.text} />
+            <Dialogs text={dialog.text} key={dialog.id}/>
         )
     })
 
