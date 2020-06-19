@@ -10,6 +10,7 @@
 .user_status {
     margin-right: 30px;
     text-align: center;
+    padding-top: 2px;
 }
 
 .user_info {
@@ -25,6 +26,7 @@
 .ava {
     width: 40px;
     border-radius: 20px;
+    font-size: 3px;
 }
 
 .btn {
@@ -34,4 +36,5 @@
     color: white;
     background-color: #4a4c63;
     border: 1px solid #393a4a;
+    border-radius: 5px;
 }
