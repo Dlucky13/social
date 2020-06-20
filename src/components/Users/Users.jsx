@@ -1,34 +1,39 @@
 import React from "react";
 import styles from './Users.module.css'
-import * as axios from 'axios'
 import userPhoto from '../../assets/img/avatar_default.jpg'
 
-class Users extends React.Component {
+const Users = (props) => {
 
-
-    constructor(props) {
-        super(props);
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then (response => {
-                    this.props.setUsers(response.data.items)
-                }
-            )
+    let pagesNumb = [];
+    for ( let i = 1; i <=5; i++) {
+        pagesNumb.push(i);
     }
 
+    for ( let j =  props.pagesCount - 2; j <= props.pagesCount; j++) {
+        pagesNumb.push(j);
+    }
 
-    render() {
-        return (
+  return  (
             <div className={styles.users_wrapper}>
+
+
+                <div>
+                    {pagesNumb.map(page => {
+                        return <span className={props.currentPage === page && styles.current_page }
+                        onClick={ () => {props.onPageChanged(page)}}> {page} </span>
+                    })}
+                </div>
+
                 {
-                    this.props.usersData.map(user =>
+                    props.usersData.map(user =>
                     <div key={user.id} className={styles.user_wrapper}>
                         <div className={styles.user_status}>
                             <img src={user.photos.small = userPhoto} className={styles.ava}></img>
                             {user.follow ? <button className={styles.btn} onClick={() => {
-                                    this.props.unfollow(user.id)
+                                    props.unfollow(user.id)
                                 }}>Unfollow</button>
                                 : <button className={styles.btn} onClick={() => {
-                                    this.props.follow(user.id)
+                                    props.follow(user.id)
                                 }}>Follow</button>}
                         </div>
                         <div className={styles.user_info}>
@@ -41,8 +46,7 @@ class Users extends React.Component {
                     </div>
                 )}
             </div>
-        )
-    }
+  )
 }
 
 export default Users

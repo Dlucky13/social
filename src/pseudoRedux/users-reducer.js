@@ -1,9 +1,16 @@
 let initialState = {
     usersData : [],
+    pagesData: {
+        pageSize: 8,
+        totalUsersCount: 0,
+        currentPage: 3,
+
+    }
 }
 
 
 const users_reducer = (state = initialState, action) => {
+    // debugger
     switch (action.type) {
         case 'follow':
             return {
@@ -35,8 +42,27 @@ const users_reducer = (state = initialState, action) => {
         case 'setUsers' :
             return {
                 ...state,
-                usersData: [...state.usersData, ...action.users],
+                // usersData: [...state.usersData, ...action.users],
+                usersData: [...action.users]
+                }
+
+
+        case 'setCurrentPage' :
+            return {
+                ...state,
+                pagesData: {
+                    ...state.pagesData,
+                    currentPage: action.currentPage}
             }
+
+        case 'setPagesTotalCount':
+            return {
+                ...state,
+                pagesData: {...state.pagesData,
+                    totalUsersCount: action.totalCount,
+                }
+            }
+
         default :
             return state;
     }
@@ -46,4 +72,6 @@ export default users_reducer;
 
 export const followAC = (userId) => ({type:'follow' , userId});
 export const unfollowAC = (userId) => ({type:'unfollow', userId});
-export const setUsersAC = (users) => ({type:'setUsers', users})
+export const setUsersAC = (users) => ({type:'setUsers', users});
+export const setCurrentPageAC = (currentPage) => ({type: 'setCurrentPage', currentPage});
+export const setPagesTotalCountAC = (totalCount) => ({type: 'setPagesTotalCount', totalCount});

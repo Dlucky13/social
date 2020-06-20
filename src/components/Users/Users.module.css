@@ -38,3 +38,8 @@
     border: 1px solid #393a4a;
     border-radius: 5px;
 }
+
+.current_page {
+    font-size: 1.2em;
+    font-weight: bold;
+}
