@@ -8,3 +8,31 @@
     width: 90px;
     border-radius: 45px;
 }
+
+.fullName {
+    font-size: 1.3em;
+}
+
+.status {
+    font-size: 0.8em;
+    color: #9a9ec0;;
+}
+
+.profile_contacts {
+    list-style: none;
+    text-align: left;
+    padding-left: 340px;
+    }
+
+.contact_item {
+    position: relative;
+}
+
+.profile_contacts .contact_item::before {
+    content: '';
+    border: 4px solid #4e516b;
+    border-radius: 3px;
+    position: absolute;
+    left: -20px;
+    top: 5px;
+}

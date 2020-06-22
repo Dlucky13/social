@@ -1,6 +1,6 @@
 import React from 'react'
 import Messages from "./Messages";
-import {actionCreator_addMessage, actionCreator_newMessageInput} from "../../pseudoRedux/messagesPage-reducer";
+import {newMessageInputCont, addMessageCont} from "../../pseudoRedux/messagesPage-reducer";
 import {connect} from "react-redux";
 
 
@@ -13,17 +13,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        newMessageInputCont: (text) => {
-            dispatch(actionCreator_newMessageInput(text))
-        },
-        addMessageCont: () => {
-            dispatch(actionCreator_addMessage())
-        }
-    }
-}
 
-const MessagesContainer = connect(mapStateToProps,mapDispatchToProps)(Messages)
+const MessagesContainer = connect(mapStateToProps,{newMessageInputCont, addMessageCont})(Messages)
 
 export default MessagesContainer;

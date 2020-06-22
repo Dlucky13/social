@@ -31,7 +31,7 @@ const newsPage_reducer = (state = initialState, action) => {
 
 }
 
-export const actionCreator_updateText = (text) => ({ type:'updateNewsText', text: text});
-export const actionCreator_addNews = () => ({type: 'updateNews'});
+export const updateTextCont = (text) => ({ type:'updateNewsText', text: text});
+export const addNewsCont = () => ({type: 'updateNews'});
 
 export default newsPage_reducer;

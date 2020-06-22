@@ -45,7 +45,7 @@ const messagesPage_reducer = (state = initialState, action) => {
 
 
 
-export const actionCreator_newMessageInput = (text) => ({type: 'updateAddMessageText', text: text});
-export const actionCreator_addMessage = () => ({type: 'addMessageState'});
+export const newMessageInputCont = (text) => ({type: 'updateAddMessageText', text: text});
+export const addMessageCont = () => ({type: 'addMessageState'});
 
 export default messagesPage_reducer;

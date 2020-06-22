@@ -3,8 +3,8 @@ let initialState = {
             { id: 1, text:'Hi, how are you?' , likeCount:10},
             { id: 2, text:"It's my first post" , likeCount:25}
         ],
-        newPostText: 'type new message'
-
+        newPostText: 'type new message',
+        profile: null,
 }
 
 const profilePage_reducer = (state = initialState, action) => {
@@ -31,7 +31,12 @@ const profilePage_reducer = (state = initialState, action) => {
                 newPostText: action.text
             };
 
+        case 'setUserProfile':
 
+            return {
+                ...state,
+                profile: action.profile,
+            }
 
         default:
             return state;
@@ -39,11 +44,12 @@ const profilePage_reducer = (state = initialState, action) => {
 }
 
 
-export const actionCreator_onPostChange = (text) => {
+export const onPostChangeCont = (text) => {
     return (
         { type:'updateNewPostInput' ,text :text}
     )
 };
-export const actionCreator_addNewPost = () => ({type: 'addPost'});
+export const addNewPostCont = () => ({type: 'addPost'});
+export const setUserProfile = (profile) => ({type: 'setUserProfile', profile})
 
 export default profilePage_reducer;

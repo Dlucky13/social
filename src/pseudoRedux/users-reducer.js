@@ -3,9 +3,9 @@ let initialState = {
     pagesData: {
         pageSize: 8,
         totalUsersCount: 0,
-        currentPage: 3,
-
-    }
+        currentPage: 1,
+    },
+    isLoading: true,
 }
 
 
@@ -63,6 +63,12 @@ const users_reducer = (state = initialState, action) => {
                 }
             }
 
+        case 'isLoading':
+            return {
+                ...state,
+                isLoading: action.isLoading,
+            }
+
         default :
             return state;
     }
@@ -70,8 +76,9 @@ const users_reducer = (state = initialState, action) => {
 
 export default users_reducer;
 
-export const followAC = (userId) => ({type:'follow' , userId});
-export const unfollowAC = (userId) => ({type:'unfollow', userId});
-export const setUsersAC = (users) => ({type:'setUsers', users});
-export const setCurrentPageAC = (currentPage) => ({type: 'setCurrentPage', currentPage});
-export const setPagesTotalCountAC = (totalCount) => ({type: 'setPagesTotalCount', totalCount});
+export const follow = (userId) => ({type:'follow' , userId});
+export const unfollow = (userId) => ({type:'unfollow', userId});
+export const setUsers = (users) => ({type:'setUsers', users});
+export const setCurrentPage = (currentPage) => ({type: 'setCurrentPage', currentPage});
+export const setPagesTotalCount = (totalCount) => ({type: 'setPagesTotalCount', totalCount});
+export const isLoadingToogle = (isLoading) => ({type:'isLoading', isLoading});
