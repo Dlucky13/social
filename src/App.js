@@ -20,8 +20,8 @@ const App = (props) => {
             <Nav />
             <Sidebar state={state.sidebarPage} />
             <div className='wrapper_main_content'>
-                < Route exact path='/' render={ () => <ProfileContainer />}/>
-                < Route path='/profile' render={ () => <ProfileContainer />}/>
+                {/*< Route exact path='/' render={ () => <ProfileContainer />}/>*/}
+                < Route path='/profile/:UserId?' render={ () => <ProfileContainer />}/>
                 < Route path='/messages' render={ () => <MessagesContainer />}/>
                 < Route path='/news' render={ () => <NewsContainer />}/>
                 < Route path='/music' component={Music}/>

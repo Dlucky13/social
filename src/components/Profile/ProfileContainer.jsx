@@ -4,11 +4,16 @@ import * as axios from "axios";
 import {connect} from "react-redux";
 import {setUserProfile} from "../../pseudoRedux/profilePage-reducer";
 import {isLoadingToogle} from "../../pseudoRedux/users-reducer";
+import {withRouter} from "react-router-dom";
 
 class InnerProfileContainer extends React.Component {
     componentDidMount() {
-
-        axios.get(`https://social-network.samuraijs.com/api/1.0//profile/10`)
+        let userId = this.props.match.params.UserId;
+        if (!userId) {
+            userId = 2;
+        }
+ debugger;
+        axios.get('https://social-network.samuraijs.com/api/1.0//profile/' + userId)
             .then ( response => {
                 this.props.setUserProfile(response.data)})
     }
@@ -30,8 +35,9 @@ let mapStateToProps = (state) => {
     }
 }
 
+let ProfileContainerWithRouter = withRouter(InnerProfileContainer)
 
-let ProfileContainer = connect (mapStateToProps,{setUserProfile, isLoadingToogle})(InnerProfileContainer)
+let ProfileContainer = connect (mapStateToProps,{setUserProfile, isLoadingToogle})(ProfileContainerWithRouter)
 
 
 
