@@ -1,8 +1,21 @@
 .header {
     grid-area: h;
     background-color: #4a4c63;
+    display: flex;
+    justify-content: space-between;
 }
 
 .header img {
     height: 100%;
+}
+
+.auth_block {
+    padding-top: 10px;
+    padding-right: 10px;
+}
+
+.auth_link {
+    text-decoration: none;
+    cursor: pointer;
+    color: #ffffff;
 }
