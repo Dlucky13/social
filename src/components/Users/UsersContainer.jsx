@@ -10,17 +10,19 @@ import {
 import Users from "./Users";
 import {connect} from "react-redux";
 import Preloader from "../../common/Preloader";
+import {withRouter} from "react-router-dom";
+import {usersAPI} from "../../api/api";
 
 
 class UsersInnerContainer extends React.Component {
 
     componentDidMount() {
         this.props.isLoadingToogle(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
                     this.props.isLoadingToogle(false);
-                    this.props.setUsers(response.data.items);
-                    this.props.setPagesTotalCount(response.data.totalCount);
+                    this.props.setUsers(data.items);
+                    this.props.setPagesTotalCount(data.totalCount);
                 }
             )
     }
@@ -28,15 +30,16 @@ class UsersInnerContainer extends React.Component {
     onPageChanged = (page) => {
         this.props.setCurrentPage(page);
         this.props.isLoadingToogle(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
-            .then(response => {
+        usersAPI.getUsers(page,this.props.pageSize )
+            .then(data => {
                     this.props.isLoadingToogle(false);
-                    this.props.setUsers(response.data.items);
+                    this.props.setUsers(data.items);
                 }
             )
     }
 
     render() {
+       
         return (
             <>
                 {this.props.isLoading && <Preloader/>}
@@ -60,8 +63,10 @@ let mapStateToProps = (state) => {
     }
 }
 
+let UsersInnerContainerWithRouter = withRouter(UsersInnerContainer);
+
 let UsersContainer = connect(mapStateToProps, {follow, unfollow,
-    setUsers, setCurrentPage, setPagesTotalCount, isLoadingToogle})(UsersInnerContainer);
+    setUsers, setCurrentPage, setPagesTotalCount, isLoadingToogle})(UsersInnerContainerWithRouter);
 
 export default UsersContainer;
 

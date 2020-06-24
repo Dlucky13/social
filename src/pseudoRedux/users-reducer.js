@@ -19,7 +19,7 @@ const users_reducer = (state = initialState, action) => {
                     if( user.id === action.userId) {
                         return {
                             ...user,
-                            follow: true,
+                            followed: true,
                         }
                     }
                     return user;
@@ -32,7 +32,7 @@ const users_reducer = (state = initialState, action) => {
                     if ( user.id === action.userId) {
                         return {
                             ...user,
-                            follow: false
+                            followed: false
                         }
                     }
                     return user;
