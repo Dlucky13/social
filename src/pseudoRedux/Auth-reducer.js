@@ -1,3 +1,6 @@
+import {authAPI} from "../api/api";
+
+
 let initialState = {
     id: null,
     email: null,
@@ -25,7 +28,22 @@ let auth_reducer = (state = initialState, action) => {
     }
 }
 
-export const setAuthorizedUser = (id,  login, email) => ({type:'setAuthorizedUser', data:{id, login, email }})
-export const loadingAuthDataToogle = (isLoading) => ({type: 'loadingAuthDataToogle', isLoading})
+const setAuthorizedUser = (id,  login, email) => ({type:'setAuthorizedUser', data:{id, login, email }})
+const loadingAuthDataToogle = (isLoading) => ({type: 'loadingAuthDataToogle', isLoading})
+
+
+export const getAuthProfile = () => (dispatch) => {
+
+    dispatch(loadingAuthDataToogle(true));
+    authAPI.me()
+        .then( (response) => {
+            if (response.data.resultCode === 0) {
+                dispatch(loadingAuthDataToogle(false));
+                let {id, login, email} = response.data.data;
+                dispatch(setAuthorizedUser(id, login, email));
+            }
+        });
+};
+
 
 export default auth_reducer;

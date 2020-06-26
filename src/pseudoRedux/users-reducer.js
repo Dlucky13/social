@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 let initialState = {
     usersData : [],
     pagesData: {
@@ -6,6 +8,7 @@ let initialState = {
         currentPage: 1,
     },
     isLoading: true,
+    isDisabled: [],
 }
 
 
@@ -42,7 +45,6 @@ const users_reducer = (state = initialState, action) => {
         case 'setUsers' :
             return {
                 ...state,
-                // usersData: [...state.usersData, ...action.users],
                 usersData: [...action.users]
                 }
 
@@ -69,6 +71,14 @@ const users_reducer = (state = initialState, action) => {
                 isLoading: action.isLoading,
             }
 
+        case 'disableToggle':
+            return {
+                ...state,
+                isDisabled: action.condition
+                    ? [...state.isDisabled,action.userId]
+                    : state.isDisabled.filter( id => id != action.userId)
+            }
+
         default :
             return state;
     }
@@ -76,9 +86,48 @@ const users_reducer = (state = initialState, action) => {
 
 export default users_reducer;
 
-export const follow = (userId) => ({type:'follow' , userId});
-export const unfollow = (userId) => ({type:'unfollow', userId});
-export const setUsers = (users) => ({type:'setUsers', users});
+const followAC = (userId) => ({type:'follow' , userId});
+const unfollowAC = (userId) => ({type:'unfollow', userId});
+const setUsersAC = (users) => ({type:'setUsers', users});
 export const setCurrentPage = (currentPage) => ({type: 'setCurrentPage', currentPage});
 export const setPagesTotalCount = (totalCount) => ({type: 'setPagesTotalCount', totalCount});
 export const isLoadingToogle = (isLoading) => ({type:'isLoading', isLoading});
+export const disableToggle = (condition, userId) => ({type: 'disableToggle', condition, userId});
+
+export const getUsers = (currentPage,pageSize) => {
+    return (dispatch) => {
+        dispatch(isLoadingToogle(true));
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(isLoadingToogle(false));
+                dispatch(setUsersAC(data.items));
+                dispatch(setPagesTotalCount(data.totalCount));
+            });
+    }
+};
+
+export const unfollow = (userId) => {
+    return (dispatch) => {
+        dispatch(disableToggle(true, userId));
+        usersAPI.unfollow(userId)
+            .then( data => {
+                dispatch(disableToggle(false, userId));
+                if (data.resultCode === 0) {
+                    dispatch(unfollowAC(userId));
+                }
+            })
+    }
+};
+
+export const follow = (userId) => {
+    return (dispatch) => {
+        dispatch(disableToggle(true, userId));
+        usersAPI.follow(userId)
+            .then( data => {
+                dispatch(disableToggle(false, userId));
+                if (data.resultCode === 0) {
+                    dispatch(followAC(userId));
+                }
+            })
+    }
+};

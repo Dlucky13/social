@@ -39,6 +39,11 @@
     border-radius: 5px;
 }
 
+.btn:disabled{
+    background-color: #c1bebe;
+    color:white;
+}
+
 .current_page {
     font-size: 1.2em;
     font-weight: bold;

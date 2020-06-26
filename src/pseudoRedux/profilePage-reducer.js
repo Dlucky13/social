@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 let initialState = {
         myPostsData: [
             { id: 1, text:'Hi, how are you?' , likeCount:10},
@@ -16,28 +18,23 @@ const profilePage_reducer = (state = initialState, action) => {
                 text: state.newPostText,
                 likeCount: 0
             };
-
             return {
                 ...state,
                 myPostsData: [...state.myPostsData,post],
                 newPostText: ''
             };
 
-
         case 'updateNewPostInput':
-
             return {
                 ...state,
                 newPostText: action.text
             };
 
-        case 'setUserProfile':
-
+        case 'setProfile':
             return {
                 ...state,
                 profile: action.profile,
             }
-
         default:
             return state;
     }
@@ -50,6 +47,13 @@ export const onPostChangeCont = (text) => {
     )
 };
 export const addNewPostCont = () => ({type: 'addPost'});
-export const setUserProfile = (profile) => ({type: 'setUserProfile', profile})
+const setProfileAC = (profile) => ({type: 'setProfile', profile})
+
+export const getUserProfile = (userId) => (dispatch) => {
+    usersAPI.getProfile(userId)
+        .then ( response => {
+            dispatch(setProfileAC(response.data))}
+        )
+}
 
 export default profilePage_reducer;
