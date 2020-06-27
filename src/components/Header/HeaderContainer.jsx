@@ -3,7 +3,6 @@ import Header from "./Header";
 import {connect} from "react-redux";
 import {getAuthProfile} from "../../pseudoRedux/Auth-reducer";
 
-
 class HeaderInnerContainer extends React.Component {
 
     componentDidMount() {

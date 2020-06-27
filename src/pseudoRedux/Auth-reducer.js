@@ -1,6 +1,5 @@
 import {authAPI} from "../api/api";
 
-
 let initialState = {
     id: null,
     email: null,

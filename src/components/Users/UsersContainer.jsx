@@ -1,7 +1,6 @@
 import React from "react";
 import {
-    disableToggle,
-    follow, getUsers, isLoadingToogle,
+    follow, getUsers,
     setCurrentPage,
     unfollow
 } from "../../pseudoRedux/users-reducer";
@@ -9,6 +8,8 @@ import Users from "./Users";
 import {connect} from "react-redux";
 import Preloader from "../../common/Preloader";
 import {withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 
 class UsersInnerContainer extends React.Component {
@@ -51,10 +52,11 @@ let mapStateToProps = (state) => {
     }
 }
 
-let UsersInnerContainerWithRouter = withRouter(UsersInnerContainer);
-
-let UsersContainer = connect(mapStateToProps,
-    {follow, unfollow,getUsers, setCurrentPage })(UsersInnerContainerWithRouter);
-
-export default UsersContainer;
+export default compose(
+    connect(mapStateToProps,
+        {follow, unfollow,getUsers, setCurrentPage }),
+    withRouter,
+    withAuthRedirect
+)
+(UsersInnerContainer)
 

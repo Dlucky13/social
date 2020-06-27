@@ -2,6 +2,8 @@ import React from "react";
 import {updateTextCont, addNewsCont} from "../../pseudoRedux/newsPage-reducer";
 import News from "./News";
 import {connect} from "react-redux";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 let mapStateToProps = (state) => {
 
@@ -11,6 +13,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-const NewsContainer = connect(mapStateToProps,{updateTextCont,addNewsCont})(News);
-
-export default NewsContainer;
+export default compose(
+    connect(mapStateToProps,{updateTextCont,addNewsCont}),
+    withAuthRedirect
+)(News)

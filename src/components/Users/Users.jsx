@@ -13,14 +13,14 @@ const Users = (props) => {
     for ( let j =  props.pagesCount - 2; j <= props.pagesCount; j++) {
         pagesNumb.push(j);
     }
-// debugger
+
   return  (
             <div className={styles.users_wrapper}>
 
                 <div>
-                    {pagesNumb.map(page => {
-                        return <span className={props.currentPage === page && styles.current_page }
-                        onClick={ () => {props.onPageChanged(page)}}> {page} </span>
+                    {pagesNumb.map( (page, id) => {
+                        return <span className={(props.currentPage === page && styles.current_page).toString()} key={id}
+                                     onClick={ () => {props.onPageChanged(page)}}> {page} </span>
                     })}
                 </div>
 
