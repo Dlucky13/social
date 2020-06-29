@@ -2,7 +2,7 @@ import React from 'react' ;
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
-import {getUserProfile} from "../../pseudoRedux/profilePage-reducer";
+import {getProfileStatus, getUserProfile, updateProfileStatus} from "../../pseudoRedux/profilePage-reducer";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 
@@ -11,14 +11,15 @@ class InnerProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.UserId;
         if (!userId) {
-            userId = 2;
+            userId = 8928;
         }
         this.props.getUserProfile(userId);
+        this.props.getProfileStatus(userId);
     }
 
     render () {
         return (
-                <Profile {...this.props} />
+                <Profile {...this.props} updateProfileStatus={this.props.updateProfileStatus} status={this.props.status}/>
         )
     }
 }
@@ -26,12 +27,13 @@ class InnerProfileContainer extends React.Component {
 let mapStateToProps = (state) => {
      return {
         profile: state.profilePage.profile,
+        status: state.profilePage.status
 
     }
 }
 
 export default compose(
-    connect(mapStateToProps,{getUserProfile}),
+    connect(mapStateToProps,{getUserProfile,getProfileStatus,updateProfileStatus}),
     withRouter,
-    withAuthRedirect
+    // withAuthRedirect
 )(InnerProfileContainer)
