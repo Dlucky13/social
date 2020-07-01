@@ -1,8 +1,9 @@
 import React from 'react'
 import Messages from "./Messages";
-import {newMessageInputCont, addMessageCont} from "../../pseudoRedux/messagesPage-reducer";
+import {addMessage} from "../../pseudoRedux/messagesPage-reducer";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 
 let mapStateToProps = (state) => {
@@ -10,12 +11,13 @@ let mapStateToProps = (state) => {
     return {
         contactsData: state.messagesPage.contactsData,
         dialogsData: state.messagesPage.dialogsData,
-        addMessageText: state.messagesPage.addMessageText,
     }
 }
 
-let withAuthRedirectContainer = withAuthRedirect(Messages)
-
-const MessagesContainer = connect(mapStateToProps,{newMessageInputCont, addMessageCont})(withAuthRedirectContainer)
-
-export default MessagesContainer;
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps,{
+        addMessage
+    }),
+)
+(Messages);

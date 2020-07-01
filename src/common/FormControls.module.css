@@ -1,0 +1,12 @@
+.postWrapper {
+
+}
+
+.fieldErr {
+    border: 1px solid red;
+}
+
+.errorMessage {
+
+    color: red;
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Messages.module.css';
-import Dialogs, {AddMessage} from "./Dialogs/Dialogs";
+import Dialogs, { AddMessageFormRedux} from "./Dialogs/Dialogs";
 import Contacts from "./Contacts/Contacts";
 
 
@@ -27,8 +27,7 @@ const Messages = (props) => {
             <div className={styles.dialogs_wrapper}>
                 {dialogsElement}
             </div>
-            <AddMessage addMessageText={props.addMessageText} newMessageInputCont={props.newMessageInputCont}
-                        addMessageCont={props.addMessageCont} />
+            <AddMessageFormRedux onSubmit={props.addMessage}/>
         </div>
     )
 }

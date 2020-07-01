@@ -11,7 +11,6 @@ let initialState = {
             {id:2, text:'How about Thusday at 7.00 ?' },
             {id:3, text:'Have any plan on the next weekend?' }
         ],
-        addMessageText: 'new Message',
 
 }
 
@@ -19,23 +18,17 @@ let initialState = {
 const messagesPage_reducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case 'updateAddMessageText':
-            return {
-                ...state,
-                addMessageText: action.text,
-            }
 
         case 'addMessageState':
             let message = {
                 id: 4,
-                text: state.addMessageText
+                text: action.data.addMessageText
             };
 
-             return messagesPage_reducer({
+             return {
                  ...state,
                  dialogsData: [...state.dialogsData,message],
-             },
-             {type: 'updateAddMessageText', text: ''});
+             }
 
 
         default:
@@ -43,9 +36,6 @@ const messagesPage_reducer = (state = initialState, action) => {
     }
 }
 
-
-
-export const newMessageInputCont = (text) => ({type: 'updateAddMessageText', text: text});
-export const addMessageCont = () => ({type: 'addMessageState'});
+export const addMessage = (data) => ({type: 'addMessageState', data});
 
 export default messagesPage_reducer;

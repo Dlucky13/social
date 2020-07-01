@@ -9,31 +9,36 @@ import {compose} from "redux";
 class InnerProfileContainer extends React.Component {
 
     componentDidMount() {
+
         let userId = this.props.match.params.UserId;
         if (!userId) {
-            userId = 8928;
-        }
+            userId = this.props.authorizedUserId;
+            }
+
+
         this.props.getUserProfile(userId);
         this.props.getProfileStatus(userId);
     }
 
-    render () {
+    render() {
         return (
-                <Profile {...this.props} updateProfileStatus={this.props.updateProfileStatus} status={this.props.status}/>
+            <Profile {...this.props} updateProfileStatus={this.props.updateProfileStatus} status={this.props.status}/>
         )
     }
 }
 
 let mapStateToProps = (state) => {
-     return {
+    return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        authorizedUserId: state.auth.id,
+        isLogged: state.auth.isLogged
 
     }
 }
 
 export default compose(
-    connect(mapStateToProps,{getUserProfile,getProfileStatus,updateProfileStatus}),
+    connect(mapStateToProps, {getUserProfile, getProfileStatus, updateProfileStatus}),
     withRouter,
     // withAuthRedirect
 )(InnerProfileContainer)

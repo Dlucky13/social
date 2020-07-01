@@ -1,25 +1,23 @@
 import React from 'react';
 import styles from './Dialogs.module.css';
+import {Field, reduxForm} from "redux-form";
+import {Textarea, ValidatedElemCreator} from "../../../common/FormControls";
+import {maxLengthCreator, requiredField} from "../../../utils/validators/formValidator";
 
+let maxLength150 = maxLengthCreator(150);
+const ValidatedTextarea = ValidatedElemCreator('textarea')
 
-export const AddMessage = (props) => {
-
-    const newMessageInput = (evt) => {
-        let text = evt.target.value;
-        props.newMessageInputCont(text);
-    }
-
-    const addMessage = () => {
-        props.addMessageCont();
-    }
-
+const AddMessageForm = (props) => {
     return (
-        <div>
-            <textarea onChange={newMessageInput} value={props.addMessageText} />
-            <button onClick={addMessage}>Send Message</button>
-        </div>
+        <form onSubmit={props.handleSubmit} >
+            <Field component={ValidatedTextarea} name='addMessageText'
+                   validate={[requiredField,maxLength150]} placeholder='type your message'/>
+            <button>Send Message</button>
+        </form>
     )
 }
+
+export const AddMessageFormRedux = reduxForm({form: 'addMessageForm'})(AddMessageForm)
 
 const Dialogs = (props) => {
     return (
