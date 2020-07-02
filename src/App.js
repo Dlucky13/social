@@ -4,36 +4,55 @@ import Nav from './components/Nav/Nav';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import Sidebar from './components/Sidebar/Sidebar';
-import {Route} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
 import MessagesContainer from "./components/Messages/MessagesContainer";
 import NewsContainer from "./components/News/NewsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import LoginPage from './components/Login/Login'
+import LoginPage from './components/Login/Login';
+import {connect} from "react-redux";
+import {compose} from "redux";
+import {initializingApp} from "./pseudoRedux/app_reducer";
+import Preloader from "./common/Preloader";
 
-const App = (props) => {
-    let state = props.store.getState();
+class App extends React.Component {
+    componentDidMount() {
+           this.props.initializingApp();
+    }
 
-    return (
-        <div className='app_wrapper'>
-            <HeaderContainer />
-            <Nav />
-            <Sidebar state={state.sidebarPage} />
-            <div className='wrapper_main_content'>
-                {/*< Route exact path='/' render={ () => <ProfileContainer />}/>*/}
-                < Route path='/profile/:UserId?' render={ () => <ProfileContainer />}/>
-                < Route path='/messages' render={ () => <MessagesContainer />}/>
-                < Route path='/news' render={ () => <NewsContainer />}/>
-                < Route path='/music' component={Music}/>
-                < Route path='/settings' component={Settings}/>
-                < Route path='/users' render={ () => <UsersContainer />}/>
-                < Route path='/login' render={ () => <LoginPage />}/>
+    render() {
+        if (!this.props.initialized) {
+            return <Preloader className='initialize_load'/>
+        }
+
+        let state = this.props.store.getState();
+
+        return (
+            <div className='app_wrapper'>
+                <HeaderContainer/>
+                <Nav/>
+                <Sidebar state={state.sidebarPage}/>
+                <div className='wrapper_main_content'>
+                    {/*< Route exact path='/' render={ () => <ProfileContainer />}/>*/}
+                    < Route path='/profile/:UserId?' render={() => <ProfileContainer/>}/>
+                    < Route path='/messages' render={() => <MessagesContainer/>}/>
+                    < Route path='/news' render={() => <NewsContainer/>}/>
+                    < Route path='/music' render={Music}/>
+                    < Route path='/settings' render={Settings}/>
+                    < Route path='/users' render={() => <UsersContainer/>}/>
+                    < Route path='/login' render={() => <LoginPage/>}/>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
+let mapStateToProps = (state) => ({
+    initialized: state.app.initialized
+});
 
-export default App;
+export default compose(
+    withRouter,
+    connect(mapStateToProps,{initializingApp}))(App);
 

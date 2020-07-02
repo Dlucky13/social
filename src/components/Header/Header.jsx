@@ -1,6 +1,6 @@
 import React from 'react' ;
 import styles from './Header.module.css';
-import {NavLink, Redirect} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import Preloader from "../../common/Preloader";
 
 const Header = (props) => {
@@ -18,7 +18,6 @@ const Header = (props) => {
                     : <>
                         <div className={styles.auth_info}>{props.login}</div>
                         <button onClick={props.logout} className={styles.logout_btn}>Logout</button>
-                        <Redirect to={'/profile'}/>
                     </>
                 }
             </div>

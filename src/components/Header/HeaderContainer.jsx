@@ -1,15 +1,11 @@
 import React from 'react'
 import Header from "./Header";
 import {connect} from "react-redux";
-import {getAuthProfile, logout} from "../../pseudoRedux/Auth-reducer";
+import {logout} from "../../pseudoRedux/Auth-reducer";
 
 class HeaderInnerContainer extends React.Component {
 
-    componentDidMount() {
-        this.props.getAuthProfile()
-    }
-
-    render() {
+   render() {
 
         return (
             <>
@@ -30,6 +26,6 @@ let mapStateToProps = (state) => {
 }
 
 
-const HeaderContainer = connect(mapStateToProps, {getAuthProfile,logout})(HeaderInnerContainer)
+const HeaderContainer = connect(mapStateToProps, {logout})(HeaderInnerContainer)
 
 export default HeaderContainer

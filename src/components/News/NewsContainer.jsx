@@ -14,6 +14,6 @@ let mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps,{updateTextCont,addNewsCont}),
-    withAuthRedirect
+    connect(mapStateToProps,{updateTextCont,addNewsCont})
+    // , withAuthRedirect
 )(News)

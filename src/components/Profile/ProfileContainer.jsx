@@ -13,6 +13,9 @@ class InnerProfileContainer extends React.Component {
         let userId = this.props.match.params.UserId;
         if (!userId) {
             userId = this.props.authorizedUserId;
+            if(!userId) {
+                userId = this.props.history.push('/login')
+            }
             }
 
 
@@ -39,6 +42,6 @@ let mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps, {getUserProfile, getProfileStatus, updateProfileStatus}),
-    withRouter,
+    withRouter
     // withAuthRedirect
 )(InnerProfileContainer)

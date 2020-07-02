@@ -34,15 +34,15 @@ const setAuthorizedUser = (id, login, email, isLogged) => ({
 const loadingAuthDataToogle = (isLoading) => ({type: 'loadingAuthDataToogle', isLoading})
 
 export const getAuthProfile = () => (dispatch) => {
-    dispatch(loadingAuthDataToogle(true));
-    authAPI.me()
+    // dispatch(loadingAuthDataToogle(true));
+   return authAPI.me()
         .then((response) => {
             if (response.data.resultCode === 0) {
-                dispatch(loadingAuthDataToogle(false));
+                // dispatch(loadingAuthDataToogle(false));
                 let {id, login, email} = response.data.data;
                 dispatch(setAuthorizedUser(id, login, email, true));
             }
-            dispatch(loadingAuthDataToogle(false));
+            // dispatch(loadingAuthDataToogle(false));
         });
 };
 
