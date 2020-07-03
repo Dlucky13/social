@@ -9,12 +9,14 @@ let initialState = {
     },
     isLoading: true,
     isDisabled: [],
+    fake: 1,
 }
 
 
 const users_reducer = (state = initialState, action) => {
     // debugger
     switch (action.type) {
+        case 'fake': return {...state, fake: state.fake + 1}
         case 'follow':
             return {
                 ...state,

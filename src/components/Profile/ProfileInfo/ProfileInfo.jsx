@@ -2,6 +2,7 @@ import React from 'react' ;
 import styles from './ProfileInfo.module.css';
 import Preloader from "../../../common/Preloader";
 import ProfileStatus from './ProfileStatus'
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 
 const ProfileInfo = (props) => {
@@ -16,7 +17,7 @@ const ProfileInfo = (props) => {
                 <img src={props.profile.photos.small}  className={styles.user_avatar}/>
                 <div className={styles.fullName}> {props.profile.fullName}</div>
                 <div>{props.profile.aboutMe}</div>
-                <ProfileStatus status={props.status} updateProfileStatus={props.updateProfileStatus}/>
+                <ProfileStatusWithHooks status={props.status} updateProfileStatus={props.updateProfileStatus}/>
                 {props.profile.lookingForAJob ? <div>Ищу работу</div> : <div>Работа это не моё</div>}
                 <ul className={styles.profile_contacts}>
                     {Object.entries(props.profile.contacts).map( ([social, contact]) => {

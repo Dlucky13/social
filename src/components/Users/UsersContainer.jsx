@@ -15,7 +15,7 @@ import {
     getIsLoading,
     getPagesCount,
     getPageSize,
-    getUsersData
+    getUsersDataSuperSelector
 } from "../../pseudoRedux/users-selectors";
 
 
@@ -31,7 +31,7 @@ class UsersInnerContainer extends React.Component {
      }
 
     render() {
-       
+       // console.log('reRender(Users)')
         return (
             <>
                 {this.props.isLoading && <Preloader/>}
@@ -48,8 +48,9 @@ class UsersInnerContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => {
+    // console.log('MSTP(users)');
     return {
-        usersData: getUsersData(state),
+        usersData: getUsersDataSuperSelector(state),
         pageSize: getPageSize(state),
         currentPage: getCurrentPage(state),
         pagesCount: getPagesCount(state),
