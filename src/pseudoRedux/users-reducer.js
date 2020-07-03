@@ -94,7 +94,7 @@ export const setPagesTotalCount = (totalCount) => ({type: 'setPagesTotalCount', 
 export const isLoadingToogle = (isLoading) => ({type:'isLoading', isLoading});
 export const disableToggle = (condition, userId) => ({type: 'disableToggle', condition, userId});
 
-export const getUsers = (currentPage,pageSize) => {
+export const requestUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(isLoadingToogle(true));
         usersAPI.getUsers(currentPage, pageSize)

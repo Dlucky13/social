@@ -1,6 +1,6 @@
 import React from "react";
 import {
-    follow, getUsers,
+    follow, requestUsers,
     setCurrentPage,
     unfollow
 } from "../../pseudoRedux/users-reducer";
@@ -10,6 +10,13 @@ import Preloader from "../../common/Preloader";
 import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage, getIsDisabled,
+    getIsLoading,
+    getPagesCount,
+    getPageSize,
+    getUsersData
+} from "../../pseudoRedux/users-selectors";
 
 
 class UsersInnerContainer extends React.Component {
@@ -41,20 +48,19 @@ class UsersInnerContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-
     return {
-        usersData: state.usersPage.usersData,
-        pageSize: state.usersPage.pagesData.pageSize,
-        currentPage: state.usersPage.pagesData.currentPage,
-        pagesCount: Math.ceil(state.usersPage.pagesData.totalUsersCount / state.usersPage.pagesData.pageSize),
-        isLoading: state.usersPage.isLoading,
-        isDisabled: state.usersPage.isDisabled
+        usersData: getUsersData(state),
+        pageSize: getPageSize(state),
+        currentPage: getCurrentPage(state),
+        pagesCount: getPagesCount(state),
+        isLoading: getIsLoading(state),
+        isDisabled: getIsDisabled(state)
     }
 }
 
 export default compose(
     connect(mapStateToProps,
-        {follow, unfollow,getUsers, setCurrentPage }),
+        {follow, unfollow,getUsers: requestUsers, setCurrentPage }),
     withRouter
     // withAuthRedirect
 )
