@@ -15,7 +15,7 @@ const News = ( props ) => {
 
     let postedNews = props.news.map( news => {
         return (
-            <OneNews text={news.text}/>
+            <OneNews text={news.text} key={news.id}/>
         )
         });
 

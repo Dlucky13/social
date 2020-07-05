@@ -7,7 +7,7 @@ let initialState = {
         ],
         profile: null,
         status: '',
-}
+};
 
 const profilePage_reducer = (state = initialState, action) => {
 
@@ -36,6 +36,12 @@ const profilePage_reducer = (state = initialState, action) => {
                 status: action.status
             }
 
+        case 'deletePost':
+            return {
+                ...state,
+                myPostsData: state.myPostsData.filter((post) => post.id !== action.postId)
+            }
+
         default:
             return state;
     }
@@ -45,7 +51,8 @@ const profilePage_reducer = (state = initialState, action) => {
 
 export const addNewPost = (data) => ({type: 'addPost', data });
 export const setProfileStatusAC = (status) => ({type: 'setProfileStatus', status })
-const setProfileAC = (profile) => ({type: 'setProfile', profile})
+const setProfileAC = (profile) => ({type: 'setProfile', profile});
+export const deletePost = (postId) => ({type: 'deletePost', postId})
 
 export const getUserProfile = (userId) => (dispatch) => {
     usersAPI.getProfile(userId)

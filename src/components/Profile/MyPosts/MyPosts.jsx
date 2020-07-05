@@ -9,6 +9,7 @@ let maxLength30 = maxLengthCreator(30);
 const ValidatedTextarea = ValidatedElemCreator('textarea')
 
 const addPostForm = (props) => {
+
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -43,5 +44,6 @@ const MyPosts = (props) => {
        </div>
     )
 }
+
 
 export default MyPosts;

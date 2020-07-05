@@ -2,27 +2,15 @@ import React from "react";
 import styles from './Users.module.css'
 import userPhoto from '../../assets/img/avatar_default.jpg'
 import {NavLink} from "react-router-dom";
+import Pagination from "../../common/Pagination";
 
 const Users = (props) => {
-
-    let pagesNumb = [];
-    for ( let i = 1; i <=5; i++) {
-        pagesNumb.push(i);
-    }
-
-    for ( let j =  props.pagesCount - 2; j <= props.pagesCount; j++) {
-        pagesNumb.push(j);
-    }
 
   return  (
             <div className={styles.users_wrapper}>
 
-                <div>
-                    {pagesNumb.map( (page, id) => {
-                        return <span className={(props.currentPage === page && styles.current_page).toString()} key={id}
-                                     onClick={ () => {props.onPageChanged(page)}}> {page} </span>
-                    })}
-                </div>
+                <Pagination currentPage={props.currentPage} onPageChanged={props.onPageChanged}
+                            pagesCount={props.pagesCount} />
 
                 {
                     props.usersData.map(user =>

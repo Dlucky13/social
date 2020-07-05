@@ -4,17 +4,22 @@ import Nav from './components/Nav/Nav';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import Sidebar from './components/Sidebar/Sidebar';
-import {Route, withRouter} from 'react-router-dom';
+import {BrowserRouter, Route, withRouter} from 'react-router-dom';
 import MessagesContainer from "./components/Messages/MessagesContainer";
-import NewsContainer from "./components/News/NewsContainer";
+import loadable from '@loadable/component'
 import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
+// import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from './components/Login/Login';
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializingApp} from "./pseudoRedux/app_reducer";
 import Preloader from "./common/Preloader";
+import store from "./redux/redux-store";
+
+
+const ProfileContainer = loadable(() => import("./components/Profile/ProfileContainer")) ;
+const NewsContainer = loadable(() => import("./components/News/NewsContainer"))
 
 class App extends React.Component {
     componentDidMount() {
@@ -52,7 +57,18 @@ let mapStateToProps = (state) => ({
     initialized: state.app.initialized
 });
 
-export default compose(
+let AppContainer =  compose(
     withRouter,
     connect(mapStateToProps,{initializingApp}))(App);
 
+let MainApp = (props) => {
+    return (
+    <BrowserRouter>
+        <Provider store={store}>
+            <AppContainer store={store}/>
+        </Provider>
+    </BrowserRouter>
+    )
+}
+
+export default MainApp
