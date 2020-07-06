@@ -4,7 +4,7 @@ import Nav from './components/Nav/Nav';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import Sidebar from './components/Sidebar/Sidebar';
-import {BrowserRouter, Route, withRouter} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Route, withRouter} from 'react-router-dom';
 import MessagesContainer from "./components/Messages/MessagesContainer";
 import loadable from '@loadable/component'
 import UsersContainer from "./components/Users/UsersContainer";
@@ -63,11 +63,11 @@ let AppContainer =  compose(
 
 let MainApp = (props) => {
     return (
-    <BrowserRouter>
+    <HashRouter >
         <Provider store={store}>
             <AppContainer store={store}/>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
     )
 }
 
