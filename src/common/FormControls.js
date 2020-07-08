@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './FormControls.module.css'
+import {Field} from "redux-form";
 
 export const ValidatedElemCreator = Element => ({ input, meta, ...props }) => {
     const hasError = meta.touched ?  meta.error : undefined;
@@ -12,3 +13,13 @@ export const ValidatedElemCreator = Element => ({ input, meta, ...props }) => {
         </div>
     );
 };
+
+export const createReduxFormField = (placeholder, name, validators, component, props = {}, text = '') => (
+    <div>
+        <Field placeholder={placeholder} name = {name}
+               validate={validators}
+                component={component}
+            {...props}
+            />{text}
+    </div>
+)

@@ -5,6 +5,8 @@
 }
 
 .user_avatar {
+    display: flex;
+    margin: auto;
     width: 90px;
     border-radius: 45px;
 }
@@ -31,3 +33,13 @@
     left: -20px;
     top: 5px;
 }
+
+.upload_input {
+    display: none;
+}
+
+.upload_msg{
+    border: 1px solid #4a4c63;
+    font-size: 0.7em;
+}
+

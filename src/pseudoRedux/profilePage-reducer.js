@@ -1,4 +1,5 @@
 import {profileAPI, usersAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 let initialState = {
         myPostsData: [
@@ -42,6 +43,12 @@ const profilePage_reducer = (state = initialState, action) => {
                 myPostsData: state.myPostsData.filter((post) => post.id !== action.postId)
             }
 
+        case 'changeAvatar' :
+            return {
+                ...state,
+                profile:{...state.profile, photos: action.img}
+            }
+
         default:
             return state;
     }
@@ -50,8 +57,9 @@ const profilePage_reducer = (state = initialState, action) => {
 
 
 export const addNewPost = (data) => ({type: 'addPost', data });
-export const setProfileStatusAC = (status) => ({type: 'setProfileStatus', status })
+const setProfileStatusAC = (status) => ({type: 'setProfileStatus', status })
 const setProfileAC = (profile) => ({type: 'setProfile', profile});
+const setProfileAvatar = (img) => ({type: 'changeAvatar', img})
 export const deletePost = (postId) => ({type: 'deletePost', postId})
 
 export const getUserProfile = (userId) => (dispatch) => {
@@ -75,6 +83,26 @@ export const updateProfileStatus = (status) => (dispatch) => {
                 dispatch(setProfileStatusAC(status))
             }
         })
+}
+
+export const updateProfileAvatar = (img) => (dispatch) => {
+    profileAPI.updateProfileAvatar(img)
+        .then( response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setProfileAvatar(response.data.data.photos))
+            }
+        })
+}
+
+export const saveProfileChanges = (profile) => async (dispatch, getState) => {
+    const userId =  getState().auth.id;
+    const response = await profileAPI.saveProfileChanges(profile)
+    if (response.data.resultCode === 0) {
+                dispatch(getUserProfile(userId))
+            } else {
+                dispatch(stopSubmit('editProfile',{_error: response.data.messages[0]}));
+                return Promise.reject(response.data.messages[0]);
+            }
 }
 
 export default profilePage_reducer;

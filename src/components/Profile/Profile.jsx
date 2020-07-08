@@ -7,8 +7,11 @@ const Profile = (props) => {
 
     return (
         <div className={styles.profile}>
-            <ProfileInfo profile={props.profile} status={props.status} updateProfileStatus={props.updateProfileStatus} />
-            <MyPostsContainer />
+            <ProfileInfo
+                profile={props.profile} status={props.status} updateProfileStatus={props.updateProfileStatus}
+                isOwner={props.isOwner} updateProfileAvatar={props.updateProfileAvatar}
+                saveProfileChanges={props.saveProfileChanges}/>
+            {props.isOwner && <MyPostsContainer />}
         </div>
     )
 }
