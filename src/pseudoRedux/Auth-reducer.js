@@ -1,4 +1,4 @@
-import {authAPI} from "../api/api";
+import {authAPI, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
 let initialState = {
@@ -7,6 +7,7 @@ let initialState = {
     login: null,
     isLogged: false,
     isLoading: false,
+    captchaUrl: null,
 }
 
 let auth_reducer = (state = initialState, action) => {
@@ -22,6 +23,13 @@ let auth_reducer = (state = initialState, action) => {
                 ...state,
                 isLoading: action.isLoading
             }
+
+        case 'getCaptchaUrlSuccess':
+            return {
+                ...state,
+                captchaUrl: action.payload.captchaUrl
+            }
+
         default:
             return state;
     }
@@ -31,6 +39,7 @@ const setAuthorizedUser = (id, login, email, isLogged) => ({
     type: 'setAuthorizedUser',
     data: {id, login, email, isLogged}
 })
+const getCaptchaUrlSuccess = (captchaUrl) => ({type: 'getCaptchaUrlSuccess', payload:{captchaUrl}})
 const loadingAuthDataToogle = (isLoading) => ({type: 'loadingAuthDataToogle', isLoading})
 
 export const getAuthProfile = () => (dispatch) => {
@@ -46,20 +55,28 @@ export const getAuthProfile = () => (dispatch) => {
         });
 };
 
-export const login = (email, password, rememberMe) => (dispatch) => {
-
-    authAPI.login(email, password, rememberMe)
+export const login = (email, password, rememberMe, captcha) => (dispatch) => {
+    authAPI.login(email, password, rememberMe, captcha)
         .then(response => {
-            // debugger
                 if (response.data.resultCode === 0) {
                     dispatch(getAuthProfile())
                 } else {
+                    if (response.data.resultCode === 10) {
+                        dispatch(getCaptchaUrl());
+                    }
                     let errAction = stopSubmit('login', {_error: response.data.messages})
                     dispatch(errAction);
                 }
             }
         )
 }
+
+export const getCaptchaUrl = () => async (dispatch) => {
+    const response = await securityAPI.getCaptchaUrl();
+    const captchaUrl = response.data.url;
+    dispatch(getCaptchaUrlSuccess(captchaUrl));
+}
+
 
 export const logout = () => (dispatch) => {
     authAPI.logout()

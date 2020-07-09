@@ -8,10 +8,10 @@ import styles from './login.module.css'
 
 const ValidatedInput = ValidatedElemCreator('input')
 
-const LoginForm = (props) => {
+const LoginForm = ({error,handleSubmit,captchaUrl}) => {
 
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field placeholder={'email'} name={'email'} component={ValidatedInput}
                 validate={[requiredField]} type={'email'}/>
@@ -23,7 +23,15 @@ const LoginForm = (props) => {
             <div>
                 <Field type={'checkbox'} name={'rememberMe'} component={ValidatedInput} />
             </div>
-            {props.error && <p className={styles.formErr}>{props.error}</p>}
+                {error && <p className={styles.formErr}>{error}</p>}
+
+                {captchaUrl &&
+                <div>
+                    <div><img src={captchaUrl}/></div>
+                    <Field placeholder={'symbols on captcha'} name={'captcha'} validate={[requiredField]}
+                           component={'input'}/>
+                </div>
+                }
             <div>
                 <button>Sign in</button>
             </div>
@@ -41,9 +49,16 @@ const Login = (props) => {
     return (
         <>
             <p> Login</p>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
         </>
     )
 }
 
-export default connect(null,{login})(Login)
+
+const mapStateToProps = (state) =>(
+    {
+    captchaUrl: state.auth.captchaUrl
+    }
+)
+
+export default connect(mapStateToProps,{login})(Login)
